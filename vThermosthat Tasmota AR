@@ -166,6 +166,7 @@ def setHeatingSetpoint(Double degreesC) {
 }
 
 def setCoolingSetpoint(degreesC){
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
 	setCoolingSetpoint(degreesC.toDouble())
 }
 
@@ -199,6 +200,7 @@ def setThermostatMode(String value) {
 
 //TESTE
 def on() {
+    sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
     sendEvent(name: "switch", value: "on")
     sendEvent(name: "thermostatMode", value: "cool")
     runIn(2,'evaluateMode')
@@ -206,6 +208,7 @@ def on() {
 //TESTE
 
 def off() {
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"Off"}')
 	sendEvent(name: "switch", value: "off")
     sendEvent(name: "thermostatMode", value: "off")
 	runIn(2,'evaluateMode')
@@ -217,11 +220,13 @@ def emergencyStop() {
 }
 
 def heat() {
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Heat","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
 	sendEvent(name: "thermostatMode", value: "heat")
 	runIn(2,'evaluateMode')
 }
 
 def auto() {
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Auto","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
 	sendEvent(name: "thermostatMode", value: "auto")
 	runIn(2,'evaluateMode')
 }
@@ -232,6 +237,7 @@ def emergencyHeat() {
 }
 
 def cool() {
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
 	sendEvent(name: "thermostatMode", value: "cool")
 	runIn(2,'evaluateMode')
 }
@@ -242,6 +248,7 @@ def poll() {
 
 
 def setTemperature(value) {
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
 	sendEvent(name:"temperature", value: value)
     sendEvent(name: "lastTempUpdate", value: new Date() )
 	runIn(2,'evaluateMode')
