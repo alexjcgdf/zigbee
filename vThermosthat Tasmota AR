@@ -208,12 +208,6 @@ def on() {
 }
 //TESTE
 
-def setCoolingSetpoint(temperature) {
-    sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
-    sendEvent(name: "coolingSetpoint", value: temperature)
-    runIn(2,'evaluateMode')
-}
-
 def off() {
 	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"Off"}')
 	sendEvent(name: "switch", value: "off")
