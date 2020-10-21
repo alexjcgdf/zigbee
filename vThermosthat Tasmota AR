@@ -18,6 +18,7 @@ metadata {
 	definition (name: "vThermostat TasmotaIR", namespace: "Derakkon", author: "Josh McAllister & Derakkon & Jorge Palmeira") {
 		capability "Thermostat"
 		capability "Thermostat Heating Setpoint"
+		capability "Thermostat Cooling Setpoint"
 		capability "Thermostat Setpoint"
 		capability "Sensor"
 		capability "Actuator"
@@ -206,6 +207,12 @@ def on() {
     runIn(2,'evaluateMode')
 }
 //TESTE
+
+def setCoolingSetpoint(temperature) {
+    sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
+    sendEvent(name: "coolingSetpoint", value: temperature)
+    runIn(2,'evaluateMode')
+}
 
 def off() {
 	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"Off"}')
