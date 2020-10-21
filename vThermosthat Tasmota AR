@@ -248,7 +248,7 @@ def poll() {
 
 
 def setTemperature(value) {
-	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
 	sendEvent(name:"temperature", value: value)
     sendEvent(name: "lastTempUpdate", value: new Date() )
 	runIn(2,'evaluateMode')
