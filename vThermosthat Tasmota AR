@@ -166,7 +166,7 @@ def setHeatingSetpoint(Double degreesC) {
 }
 
 def setCoolingSetpoint(degreesC){
-	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+temperature+'"}')
+	sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
 	setCoolingSetpoint(degreesC.toDouble())
 }
 
