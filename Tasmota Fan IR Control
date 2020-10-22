@@ -1,0 +1,19 @@
+
+
+
+
+
+FanControl
+Device Selector
+
+capability.fanControl
+Driver Definition
+
+capability "FanControl"
+Attributes
+
+speed - ENUM ["low","medium-low","medium","medium-high","high","on","off","auto"]
+Commands
+
+setSpeed(fanspeed)
+fanspeed required (ENUM) - Fan speed to set
