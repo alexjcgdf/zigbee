@@ -45,6 +45,22 @@ def off() {
     sendEvent(name: "switch", value: "off")
 }
 
+
+def low() {
+    sendTasmota('IRsend '+LOWIR)
+    sendEvent(name: "fanspeed", value: "low")
+}
+
+def medium() {
+    sendTasmota('IRsend '+MIDIR)
+    sendEvent(name: "fanspeed", value: "medium")
+}
+
+ef high() {
+    sendTasmota('IRsend '+HIGHIR)
+    sendEvent(name: "fanspeed", value: "high")
+}
+
 // speed - ENUM ["low","medium-low","medium","medium-high","high","on","off","auto"]
 
 
