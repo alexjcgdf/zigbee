@@ -5,7 +5,6 @@ metadata {
 	
     	command "hdmi1"
    	command "hdmi2"
-    	command "mute"
     	command "netflix"
    	command "up"
     	command "down"
@@ -35,6 +34,17 @@ preferences {
  	input name: "ChanDownIRsend", title:"Channel Down - Código IR", type: "string"
  	input name: "VolUpIRsend", title:"Vol Up - Código IR", type: "string"
  	input name: "VolDownIRsend", title:"Vol Down - Código IR", type: "string"
+	
+	input name: "hdmi1IRsend", title:"Hdmi1 - Código IR", type: "string"
+	input name: "hdmi2IRsend", title:"Hdmi2 - Código IR", type: "string"
+	input name: "netflixIRsend", title:"netflix - Código IR", type: "string"
+	input name: "upIRsend", title:"up - Código IR", type: "string"
+	input name: "downIRsend", title:"down - Código IR", type: "string"
+	input name: "rightIRsend", title:"right - Código IR", type: "string"
+	input name: "leftIRsend", title:"left - Código IR", type: "string"
+	input name: "confirmIRsend", title:"confirm - Código IR", type: "string"
+	
+	
 	input name: "offThreshold", title:"Off Threshold Power (W)", type: "number", required: true, defaultValue: 3.9
 	input name: "onThreshold", title:"On Threshold Power (W)", type: "number", required: true, defaultValue: 4
 }
