@@ -1,19 +1,81 @@
 
+metadata {
+    definition(name: "Tasmota Switch IR", namespace: "jorgespneto", author: "Jorge Palmeira") {
+        capability "FanControl"
+
+    }
+}
+preferences {
+	input name: "TasmotaIP", title:"local IP address of Tasmota IR", type: "string", required: true
+	input name: "username", title:"Username of Tasmota IR", type: "string"
+	input name: "password", title:"Password of Tasmota IR", type: "string"
+	input name: "OnIRsend", title:"On - Código IR", type: "string"
+	input name: "OffIRsend", title:"Off - Código IR", type: "string"
+  input name: "LowIRsend", title:"Low - Código IR", type: "string"
+  input name: "MidIRsend", title:"Mid - Código IR", type: "string"
+  input name: "HighIRsend", title:"High - Código IR", type: "string"
+	input name: "offThreshold", title:"Off Threshold Power (W)", type: "number", required: true, defaultValue: 3.9
+	input name: "onThreshold", title:"On Threshold Power (W)", type: "number", required: true, defaultValue: 4
+}
+
+def parse(String description) {
+    log.debug description
+}
 
 
+def installed() {
+    initialize()
+}
+
+def updated() {
+    initialize()
+}
+
+def initialize() {
+
+}
+
+def on() { 
+    sendTasmota('IRsend '+ONIR)
+    sendEvent(name: "switch", value: "on")
+}
+
+def off() {
+    sendTasmota('IRsend '+OFFIR)
+    sendEvent(name: "switch", value: "off")
+}
+
+// speed - ENUM ["low","medium-low","medium","medium-high","high","on","off","auto"]
 
 
-FanControl
-Device Selector
+def sendTasmota(command) {
+	def options = [
+		method: "GET",
+		headers: [HOST: settings.TasmotaIP+":80"],
+		path: "/cm?user=" + (settings.username ?: "") + "&password=" + (settings.password ?: "") + "&cmnd=" + URLEncoder.encode(command, "UTF-8").replaceAll(/\+/,'%20')
+	]
+	log.debug options
+	def hubAction = new hubitat.device.HubAction(options, null) //Alterei
+	sendHubCommand(hubAction)
+}
 
-capability.fanControl
-Driver Definition
+def getONIR() {
+	return (settings.OnIRsend ?: "")
+}
 
-capability "FanControl"
-Attributes
+def getOFFIR() {
+	return (settings.OffIRsend ?: "")
+}
 
-speed - ENUM ["low","medium-low","medium","medium-high","high","on","off","auto"]
-Commands
 
-setSpeed(fanspeed)
-fanspeed required (ENUM) - Fan speed to set
+def getLOWIR() {
+	return (settings.LowIRsend ?: "")
+}
+
+def getMIDIR() {
+	return (settings.MidIRsend ?: "")
+}
+
+def getHIGHIR() {
+	return (settings.HighIRsend ?: "")
+}
