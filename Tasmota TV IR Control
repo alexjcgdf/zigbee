@@ -1,6 +1,7 @@
 metadata {
     definition(name: "Tasmota TV IR Control", namespace: "jorgespneto", author: "Jorge Palmeira") {
         capability "TV"
+	capability "Switch"
 
     }
 }
@@ -10,11 +11,10 @@ preferences {
 	input name: "password", title:"Password of Tasmota IR", type: "string"
 	input name: "OnIRsend", title:"On - Código IR", type: "string"
 	input name: "OffIRsend", title:"Off - Código IR", type: "string"
-  input name: "ChanUpIRsend", title:"Channel Up - Código IR", type: "string"
-  input name: "ChanDownIRsend", title:"Channel Down - Código IR", type: "string"
-  input name: "VolUpIRsend", title:"Vol Up - Código IR", type: "string"
-  input name: "VolDownIRsend", title:"Vol Down - Código IR", type: "string"
-  input name: "HighIRsend", title:"High - Código IR", type: "string"
+ 	input name: "ChanUpIRsend", title:"Channel Up - Código IR", type: "string"
+ 	input name: "ChanDownIRsend", title:"Channel Down - Código IR", type: "string"
+ 	input name: "VolUpIRsend", title:"Vol Up - Código IR", type: "string"
+ 	input name: "VolDownIRsend", title:"Vol Down - Código IR", type: "string"
 	input name: "offThreshold", title:"Off Threshold Power (W)", type: "number", required: true, defaultValue: 3.9
 	input name: "onThreshold", title:"On Threshold Power (W)", type: "number", required: true, defaultValue: 4
 }
@@ -47,22 +47,26 @@ def off() {
 }
 
 
-def low() {
-    sendTasmota('IRsend '+LOWIR)
-    sendEvent(name: "fanspeed", value: "low")
+def channelUp() {
+    sendTasmota('IRsend '+CHUPIR)
+    sendEvent(name: "channel", value: "channelUp")
 }
 
-def medium() {
-    sendTasmota('IRsend '+MIDIR)
-    sendEvent(name: "fanspeed", value: "medium")
+def channelDown() {
+    sendTasmota('IRsend '+CHDOIR)
+    sendEvent(name: "channel", value: "channelDown")
 }
 
-def high() {
-    sendTasmota('IRsend '+HIGHIR)
-    sendEvent(name: "fanspeed", value: "high")
+
+def volumeUp() {
+    sendTasmota('IRsend '+VOLUPIR)
+    sendEvent(name: "volume", value: "volumeUp")
 }
 
-// speed - ENUM ["low","medium-low","medium","medium-high","high","on","off","auto"]
+def volumeDown() {
+    sendTasmota('IRsend '+VOLDOIR)
+    sendEvent(name: "volume", value: "volumeDown")
+}
 
 
 def sendTasmota(command) {
@@ -85,14 +89,18 @@ def getOFFIR() {
 }
 
 
-def getLOWIR() {
-	return (settings.LowIRsend ?: "")
+def getCHUPIR() {
+	return (settings.ChanUpIRsend ?: "")
 }
 
-def getMIDIR() {
-	return (settings.MidIRsend ?: "")
+def getCHDOIR() {
+	return (settings.ChanDownIRsend ?: "")
 }
 
-def getHIGHIR() {
-	return (settings.HighIRsend ?: "")
+def getVOLUPIR() {
+	return (settings.VolUpIRsend ?: "")
+}
+
+def getVOLDOIR() {
+	return (settings.VolDownIRsend ?: "")
 }
