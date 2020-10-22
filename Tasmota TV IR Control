@@ -3,7 +3,6 @@ metadata {
         capability "TV"
 	capability "Switch"
 	
-	command "tv_source"
     	command "hdmi1"
    	command "hdmi2"
     	command "mute"
@@ -89,6 +88,85 @@ def volumeDown() {
     sendEvent(name: "volume", value: "volumeDown")
 }
 
+//Comandos Extras
+
+
+def netflix(){
+	state.button = "Netflix"
+}
+
+
+def hdmi1() {
+	log.debug "Selecting HDMI 1 as input"
+}
+
+def hdmi2() {
+	log.debug "Selecting HDMI 2 as input"
+
+}
+
+def up(){
+	state.button = "up"
+}
+
+def down(){
+	state.button = "down"
+}
+
+def right(){
+	state.button = "right"
+}
+
+def left(){
+	state.button = "left"
+}
+
+def confirm(){
+	state.button = "confirm"
+}
+
+def num1(){
+	state.button = "num1"
+}
+
+def num2(){
+	state.button = "num2"
+
+}
+
+def num3(){
+	state.button = "num3"
+}
+
+def num4(){
+	state.button = "num4"
+}
+
+def num5(){
+	state.button = "num5"
+}
+
+def num6(){
+	state.button = "num6"
+}
+
+def num7(){
+	state.button = "num7"
+}
+
+def num8(){
+	state.button = "num8"
+}
+
+def num9(){
+	state.button = "num9"
+}
+
+def num0(){
+	state.button = "num0"
+}
+
+//Fim dos comandos extras
 
 def sendTasmota(command) {
 	def options = [
