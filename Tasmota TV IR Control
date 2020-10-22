@@ -2,6 +2,27 @@ metadata {
     definition(name: "Tasmota TV IR Control", namespace: "jorgespneto", author: "Jorge Palmeira") {
         capability "TV"
 	capability "Switch"
+	
+	command "tv_source"
+    	command "hdmi1"
+   	command "hdmi2"
+    	command "mute"
+    	command "netflix"
+   	command "up"
+    	command "down"
+    	command "right"
+    	command "left"
+    	command "confirm"
+    	command "num1"
+    	command "num2"
+    	command "num3"
+    	command "num4"
+    	command "num5"
+    	command "num6"
+    	command "num7"
+    	command "num8"
+    	command "num9"
+    	command "num0"
 
     }
 }
