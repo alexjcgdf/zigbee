@@ -56,7 +56,7 @@ def medium() {
     sendEvent(name: "fanspeed", value: "medium")
 }
 
-ef high() {
+def high() {
     sendTasmota('IRsend '+HIGHIR)
     sendEvent(name: "fanspeed", value: "high")
 }
