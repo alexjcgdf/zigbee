@@ -1,6 +1,6 @@
 
 metadata {
-    definition(name: "Tasmota Switch IR", namespace: "jorgespneto", author: "Jorge Palmeira") {
+    definition(name: "Tasmota Fan IR", namespace: "jorgespneto", author: "Jorge Palmeira") {
         capability "FanControl"
 
     }
