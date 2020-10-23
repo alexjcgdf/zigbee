@@ -30,7 +30,7 @@ metadata {
         capability "Actuator"
         capability "Configuration"
         capability "Refresh"
-        capability "Health Check"
+//        capability "Health Check"
         capability "Switch"
 
         command "childOn", ["string"]
@@ -58,6 +58,7 @@ metadata {
         input type: "paragraph", element: "paragraph", title: "Version", description: version(), displayDuringSetup: false
     }
 
+    /*
     // simulator metadata
     simulator {
         // status messages
@@ -84,6 +85,7 @@ metadata {
         main "switch"
         details(["switch", "refresh"])
     }
+*/
 }
 
 def isUnexpectedEndpoint(String model) {
@@ -116,6 +118,7 @@ def installed() {
 
 def updated() {
     log.debug "updated()"
+    unschedule()
     updateDataValue("onOff", "catchall")
     refresh()
 }
@@ -262,6 +265,7 @@ def poll() {
     refresh()
 }
 
+/*
 def healthPoll() {
     log.debug "healthPoll()"
     def cmds = refresh()
@@ -283,10 +287,11 @@ def configureHealthCheck() {
         state.hasConfiguredHealthCheck = true
     }
 }
+*/
 
 def configure() {
     log.debug "configure()"
-    configureHealthCheck()
+//    configureHealthCheck()
 
     //other devices supported by this DTH in the future
     def cmds = zigbee.onOffConfig(0, 120)
