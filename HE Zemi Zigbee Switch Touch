@@ -22,6 +22,8 @@ public static String version() { return "v0.0.2.20200426" }
  *   2020/04/26 >>> v0.0.2.20200426 - Support to old Jemi swtich version
  *   2020/04/25 >>> v0.0.1.20200425 - Initialize
  */
+ 
+ // After changing your driver to this version, be sure to view the Parent Device and click SAVE under the user settings section as I added an "unschedule()" call in the "updated()" routine to make sure the HealthCheck schedule is disabled
 
 import java.lang.Math
 
