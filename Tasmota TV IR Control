@@ -43,16 +43,16 @@ preferences {
 	input name: "rightIRsend", title:"right - Código IR", type: "string"
 	input name: "leftIRsend", title:"left - Código IR", type: "string"
 	input name: "confirmIRsend", title:"confirm - Código IR", type: "string"
-	input name: "num1Rsend", title:"num1 - Código IR", type: "string"
-	input name: "num2Rsend", title:"num2 - Código IR", type: "string"
-	input name: "num3Rsend", title:"num3 - Código IR", type: "string"
-	input name: "num4Rsend", title:"num4 - Código IR", type: "string"
-	input name: "num5Rsend", title:"num5 - Código IR", type: "string"
-	input name: "num6Rsend", title:"num6 - Código IR", type: "string"
-	input name: "num7Rsend", title:"num7 - Código IR", type: "string"
-	input name: "num8Rsend", title:"num8 - Código IR", type: "string"
-	input name: "num9Rsend", title:"num9 - Código IR", type: "string"
-	input name: "num0Rsend", title:"num0 - Código IR", type: "string"
+	input name: "num1IRsend", title:"num1 - Código IR", type: "string"
+	input name: "num2IRsend", title:"num2 - Código IR", type: "string"
+	input name: "num3IRsend", title:"num3 - Código IR", type: "string"
+	input name: "num4IRsend", title:"num4 - Código IR", type: "string"
+	input name: "num5IRsend", title:"num5 - Código IR", type: "string"
+	input name: "num6IRsend", title:"num6 - Código IR", type: "string"
+	input name: "num7IRsend", title:"num7 - Código IR", type: "string"
+	input name: "num8IRsend", title:"num8 - Código IR", type: "string"
+	input name: "num9IRsend", title:"num9 - Código IR", type: "string"
+	input name: "num0IRsend", title:"num0 - Código IR", type: "string"
 	input name: "offThreshold", title:"Off Threshold Power (W)", type: "number", required: true, defaultValue: 3.9
 	input name: "onThreshold", title:"On Threshold Power (W)", type: "number", required: true, defaultValue: 4
 }
@@ -152,43 +152,53 @@ def confirm(){
 
 def num1(){
 	state.button = "num1"
+	sendTasmota('IRsend '+NUM1IR)
 }
 
 def num2(){
 	state.button = "num2"
+	sendTasmota('IRsend '+NUM2IR)
 
 }
 
 def num3(){
 	state.button = "num3"
+	sendTasmota('IRsend '+NUM3IR)
 }
 
 def num4(){
 	state.button = "num4"
+	sendTasmota('IRsend '+NUM4IR)
 }
 
 def num5(){
 	state.button = "num5"
+	sendTasmota('IRsend '+NUM5IR)
 }
 
 def num6(){
 	state.button = "num6"
+	sendTasmota('IRsend '+NUM6IR)
 }
 
 def num7(){
 	state.button = "num7"
+	sendTasmota('IRsend '+NUM7IR)
 }
 
 def num8(){
 	state.button = "num8"
+	sendTasmota('IRsend '+NUM8IR)
 }
 
 def num9(){
 	state.button = "num9"
+	sendTasmota('IRsend '+NUM9IR)
 }
 
 def num0(){
 	state.button = "num0"
+	sendTasmota('IRsend '+NUM0IR)
 }
 
 //Fim dos comandos extras
@@ -256,3 +266,42 @@ def getLEFTIR() {
 	return (settings.leftIRsend ?: "")
 }
 
+def getNUM1IR() {
+	return (settings.num1IRsend ?: "")
+}
+
+def getNUM2IR() {
+	return (settings.num2IRsend ?: "")
+}
+
+def getNUM3IR() {
+	return (settings.num3IRsend ?: "")
+}
+
+def getNUM4IR() {
+	return (settings.num4IRsend ?: "")
+}
+
+def getNUM5IR() {
+	return (settings.num5IRsend ?: "")
+}
+
+def getNUM6IR() {
+	return (settings.num6IRsend ?: "")
+}
+
+def getNUM7IR() {
+	return (settings.num7IRsend ?: "")
+}
+
+def getNUM8IR() {
+	return (settings.num8IRsend ?: "")
+}
+
+def getNUM9IR() {
+	return (settings.num9IRsend ?: "")
+}
+
+def getNUM0IR() {
+	return (settings.num0IRsend ?: "")
+}
