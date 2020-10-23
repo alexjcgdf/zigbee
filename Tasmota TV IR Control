@@ -1,7 +1,7 @@
 metadata {
     definition(name: "Tasmota TV IR Control", namespace: "jorgespneto", author: "Jorge Palmeira") {
-        capability "TV"
-	capability "Switch"
+        capability "SamsungTV"
+
 
 	attribute "channel", "number"
 	attribute "volume", "number"
@@ -9,7 +9,8 @@ metadata {
 	attribute "power", "string"
 	attribute "sound", "string"
 	attribute "picture", "string"
-	
+        
+        
     	command "hdmi1"
    	command "hdmi2"
     	command "netflix"
@@ -60,6 +61,8 @@ preferences {
 	input name: "num8IRsend", title:"num8 - Código IR", type: "string"
 	input name: "num9IRsend", title:"num9 - Código IR", type: "string"
 	input name: "num0IRsend", title:"num0 - Código IR", type: "string"
+    input name: "mutedsend", title:"muted - Código IR", type: "string"
+    input name: "unmutedsend", title:"unmuted - Código IR", type: "string"
 	input name: "offThreshold", title:"Off Threshold Power (W)", type: "number", required: true, defaultValue: 3.9
 	input name: "onThreshold", title:"On Threshold Power (W)", type: "number", required: true, defaultValue: 4
 }
@@ -209,6 +212,20 @@ def num0(){
 	sendTasmota('IRsend '+NUM0IR)
 }
 
+
+def muted(){
+	sendEvent(name: "mute", value: "muted")
+	sendTasmota('IRsend '+MUTEDIR)
+    
+    mute
+}
+
+def unmuted(){
+	sendEvent(name: "mute", value: "unmuted")
+	sendTasmota('IRsend '+UNMUTEDIR)
+}
+
+
 //Fim dos comandos extras
 
 def sendTasmota(command) {
@@ -316,4 +333,14 @@ def getNUM9IR() {
 
 def getNUM0IR() {
 	return (settings.num0IRsend ?: "")
+}
+
+
+def getMUTEDIR() {
+	return (settings.mutedIRsend ?: "")
+}
+
+
+def getUNMUTEDIR() {
+	return (settings.unmutedIRsend ?: "")
 }
