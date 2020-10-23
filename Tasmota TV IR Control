@@ -2,6 +2,13 @@ metadata {
     definition(name: "Tasmota TV IR Control", namespace: "jorgespneto", author: "Jorge Palmeira") {
         capability "TV"
 	capability "Switch"
+
+	attribute "channel", "number"
+	attribute "volume", "number"
+	attribute "movieMode", "string"
+	attribute "power", "string"
+	attribute "sound", "string"
+	attribute "picture", "string"
 	
     	command "hdmi1"
    	command "hdmi2"
