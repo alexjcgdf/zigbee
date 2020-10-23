@@ -148,6 +148,7 @@ def left(){
 
 def confirm(){
 	state.button = "confirm"
+	sendTasmota('IRsend '+CONFIRMIR)
 }
 
 def num1(){
@@ -264,6 +265,10 @@ def getRIGHTIR() {
 
 def getLEFTIR() {
 	return (settings.leftIRsend ?: "")
+}
+
+def getCONFIRMIR() {
+	return (settings.confirmIRsend ?: "")
 }
 
 def getNUM1IR() {
