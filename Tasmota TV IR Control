@@ -110,33 +110,40 @@ def volumeDown() {
 
 
 def netflix(){
+	sendTasmota('IRsend '+NETFIR)
 	state.button = "Netflix"
 }
 
 
 def hdmi1() {
 	log.debug "Selecting HDMI 1 as input"
+	sendTasmota('IRsend '+HDMI1IR)
 }
 
 def hdmi2() {
 	log.debug "Selecting HDMI 2 as input"
+	sendTasmota('IRsend '+HDMI2IR)
 
 }
 
 def up(){
 	state.button = "up"
+	sendTasmota('IRsend '+UPIR)
 }
 
 def down(){
 	state.button = "down"
+	sendTasmota('IRsend '+DOWNIR)
 }
 
 def right(){
 	state.button = "right"
+	sendTasmota('IRsend '+RIGHTIR)
 }
 
 def left(){
 	state.button = "left"
+	sendTasmota('IRsend '+leftIR)
 }
 
 def confirm(){
@@ -221,3 +228,31 @@ def getVOLUPIR() {
 def getVOLDOIR() {
 	return (settings.VolDownIRsend ?: "")
 }
+
+def getNETFIR() {
+	return (settings.netflixIRsend ?: "")
+}
+def getHDMI1IR() {
+	return (settings.hdmi1IRsend ?: "")
+}
+
+def getHDMI2IR() {
+	return (settings.hdmi2IRsend ?: "")
+}
+
+def getUPIR() {
+	return (settings.upIRsend ?: "")
+}
+
+def getDOWNIR() {
+	return (settings.downIRsend ?: "")
+}
+
+def getRIGHTIR() {
+	return (settings.rightIRsend ?: "")
+}
+
+def getLEFTIR() {
+	return (settings.leftIRsend ?: "")
+}
+
