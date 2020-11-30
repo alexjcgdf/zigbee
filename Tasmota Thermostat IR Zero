@@ -2,11 +2,13 @@ metadata {
     definition(name: "Tasmota Thermostat IR Zero", namespace: "jorge", author: "Jorge Palmeira") {
         capability "Switch"
 	capability "Thermostat"
-	capability "Thermostat Heating Setpoint"
 	capability "Thermostat Cooling Setpoint"
 	capability "Thermostat Setpoint"
 	capability "Sensor"
 	capability "Actuator"
+	capability "Configuration"
+	capability "Refresh"
+	capability "HealthCheck" 
 
     }
 }
@@ -39,11 +41,15 @@ def initialize() {
 def on() { 
     sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"On","Mode":"Cool","FanSpeed":"'+FANMODE+'","Temp":"'+device.currentValue("coolingSetpoint")+'"}')
     sendEvent(name: "switch", value: "on")
+    sendEvent(name: "thermostatMode", value: "cool", descriptionText: "Thermostat Mode set to cool", isStateChange: true)
 }
 
 def off() {
     sendTasmota('IRhvac {"Vendor":"'+VENDOR+'", "Power":"Off"}')
+    log_debug "Executing 'off'"
+    state.thermostatMode = "off"
     sendEvent(name: "switch", value: "off")
+    sendEvent(name: "thermostatMode", value: "off", descriptionText: "Thermostat Mode set to off", isStateChange: true)
 }
 
 // colei aqui pra baixo
@@ -57,7 +63,9 @@ def emergencyStop() {
 }
 
 def heat() {
-	sendEvent(name: "thermostatMode", value: "heat")
+	log_debug "Executing 'heat'"
+	state.thermostatMode = "heat"
+	sendEvent(name: "thermostatMode", value: "heat", descriptionText: "Thermostat Mode set to heat", isStateChange: true)
 }
 
 def auto() {
@@ -69,8 +77,33 @@ def emergencyHeat() {
 }
 
 def cool() {
-	sendEvent(name: "thermostatMode", value: "cool")
+	log_debug "Executing 'cool'"
+	state.thermostatMode = "cool"
+	sendEvent(name: "thermostatMode", value: "cool", descriptionText: "Thermostat Mode set to cool", isStateChange: true)
 }
+
+// aqui
+
+
+def fan() {
+	log_debug "Executing 'fan'"
+	state.thermostatMode = "fan"
+	send_Event(name: "thermostatMode", value: "fan", descriptionText: "Thermostat Mode set to fan", isStateChange: true)
+}
+
+def dry() {
+	log_debug "Executing 'dry'"
+	state.thermostatMode = "dry"
+	sendEvent(name: "thermostatMode", value: "dry", descriptionText: "Thermostat Mode set to dry", isStateChange: true)
+}
+
+def auto() {
+	log_debug "Executing 'auto'"
+	state.thermostatMode = "auto"
+	send_Event(name: "thermostatMode", value: "auto", descriptionText: "Thermostat Mode set to auto", isStateChange: true)
+}
+// terminei aqui
+
 
 def poll() {
 	null
