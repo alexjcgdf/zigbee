@@ -1,6 +1,5 @@
 metadata {
     definition(name: "Tasmota TV IR Control", namespace: "jorgespneto", author: "Jorge Palmeira") {
-        capability "SamsungTV"
 	capability "TV"
 
 
